@@ -26,11 +26,11 @@ export function getLocalStorageUsers(): User[] {
 export function ControlPanel({setCard, reveal, answerRevealed}: {setCard: (c: Card)=>void, reveal: (r: boolean) => void, answerRevealed: boolean}): JSX.Element {
     
     const [users, setUsers] = useState<User[]>(getLocalStorageUsers);
-
+    const [deck, setDeck] = useState<Card[]>(CARDS);
     
     function setRandomCard() {
         reveal(false);
-        setCard(getRandomElement(CARDS as unknown as Card[]))
+        setCard(getRandomElement(deck))
     }
 
     function shuffleUsers() {
@@ -42,6 +42,16 @@ export function ControlPanel({setCard, reveal, answerRevealed}: {setCard: (c: Ca
         localStorage.setItem(LOCAL_STORAGE_USERS, JSON.stringify(users))
     }
 
+    function addNewCard(){
+        const newCard = {
+            id: Math.random(),
+            kind: "Custom",
+            prompt: window.prompt("What do you want the prompt to be?") || "NO PROMPT",
+            answer: window.prompt("What should the answer be?") || "NO ANSWER"
+        };
+        setDeck([...deck, newCard])
+    }
+
     return <Col>
     <h1>Control Panel</h1>
     <UserList users={users} setUsers={setUsers}></UserList>
@@ -49,5 +59,6 @@ export function ControlPanel({setCard, reveal, answerRevealed}: {setCard: (c: Ca
     <Button onClick={()=>reveal(!answerRevealed)} className="m-4">Reveal Answer</Button>
     <Button onClick={shuffleUsers} className="m-4">Shuffle Users</Button>
     <Button onClick={save} className="m-4" variant="success">Save</Button>
+    <Button onClick={addNewCard} className="m-4">Add New Card</Button>
     </Col>
 }
