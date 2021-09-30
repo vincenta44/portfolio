@@ -11,12 +11,15 @@ import { Card } from './interfaces/card';
 
 function App(): JSX.Element {
   const [activeCard, setActiveCard] = useState<Card>(CARDS[0] as unknown as Card);
+  const [answerRevealed, setAnswerRevealed] = useState<boolean>(false);
 
   return (
     <Container className="App">
       <Row>
-        <ControlPanel setCard={setActiveCard}></ControlPanel>
-        <CardViewer card={activeCard}></CardViewer>
+        <ControlPanel setCard={setActiveCard} 
+        reveal={setAnswerRevealed}
+        answerRevealed={answerRevealed}></ControlPanel>
+        <CardViewer card={activeCard} answerRevealed={answerRevealed}></CardViewer>
       </Row>
     </Container>
   );
