@@ -1,12 +1,11 @@
 import EditableDndList, { Task } from "editable-dnd-list";
 import { useState } from 'react';
 
-export function UserList(): JSX.Element {
-    const [users, setUsers] = useState<Task[]>([
-        {id: '1', text: "Vincent Ains"}
-    ])
+export function UserList({users, setUsers}: {users: Task[], setUsers: (t: Task[])=>void}): JSX.Element {
+
 
     function handleChange(items: Task[]): void {
+        setUsers(items);
         console.log(items);
     }
 
