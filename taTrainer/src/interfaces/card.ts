@@ -1,6 +1,6 @@
 //export type CardType = string;
 
-export enum CardType {
+export enum CardKind {
     TeachingEasy = "Teaching Prompt Round 1", 
     TeachingHard = "Teaching Prompt Round 2", 
     Microagressions = "Microagressions Round"
@@ -8,7 +8,7 @@ export enum CardType {
 
 export interface Card{
     ID: number
-    kind: CardType
-    Prompt: string
+    Kind: CardKind
+    prompt: string
     Answer: string
 }
