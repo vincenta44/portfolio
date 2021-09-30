@@ -23,10 +23,10 @@ export function getLocalStorageUsers(): User[] {
     }
 }
 
-export function ControlPanel({setCard, reveal, answerRevealed}: {setCard: (c: Card)=>void, reveal: (r: boolean) => void, answerRevealed: boolean}): JSX.Element {
+export function ControlPanel({setCard, reveal, answerRevealed, deck, showAddCardModal}: {setCard: (c: Card)=>void, reveal: (r: boolean) => void, answerRevealed: boolean, showAddCardModal: (b: boolean) => void, deck: Card[]}): JSX.Element {
     
     const [users, setUsers] = useState<User[]>(getLocalStorageUsers);
-    const [deck, setDeck] = useState<Card[]>(CARDS);
+    
     
     function setRandomCard() {
         reveal(false);
@@ -43,13 +43,14 @@ export function ControlPanel({setCard, reveal, answerRevealed}: {setCard: (c: Ca
     }
 
     function addNewCard(){
-        const newCard = {
+        showAddCardModal(true);
+       /* const newCard: Card = {
             id: Math.random(),
             kind: "Custom",
             prompt: window.prompt("What do you want the prompt to be?") || "NO PROMPT",
             answer: window.prompt("What should the answer be?") || "NO ANSWER"
         };
-        setDeck([...deck, newCard])
+        setDeck([...deck, newCard])*/
     }
 
     return <Col>
