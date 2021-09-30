@@ -7,8 +7,8 @@ export enum CardKind {
 }
 
 export interface Card{
-    ID: number
-    Kind: CardKind
+    id: number
+    kind: CardKind
     prompt: string
-    Answer: string
+    answer: string
 }
